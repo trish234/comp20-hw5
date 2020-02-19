@@ -1,7 +1,56 @@
 <! DOCTYPE html>
 <html lang="en">
 <head>
+  <title>Joe's Hotdogs</title>
+  <script>
+    var hotdogs, fries, sodas;
+    hotdogs = window.prompt("How many hotdogs?");
+    fries = window.prompt("How many fries?");
+    sodas = window.prompt("How many sodas?");
+    function roundDec(dec){
+      var rounded = (((Math.round(dec * 100)) / 100).toFixed(2));
+      return rounded;
+    }
+  </script>
 </head>
 <body>
+  <h1>Welcome to Joe's Hotdogs!</h1>
+  <h2>Your order </h2>
+  <p>
+     # Hotdogs: <span id="hotdogsNum"></span> at $3.25 is $
+    <span id="hotdogsCost"></span><br />
+    # Fries: <span id="friesNum"> </span> at $2.00 is $
+    <span id="friesCost"></span><br />
+    # Sodas: <span id="sodasNum"> </span> at $1.50 is $
+    <span id="sodasCost"></span>  <br />
+    <span id="discount"></span>
+    Subtotal: $<span id = "subtotal"></span> <br />
+    Meals Tax: $<span id = "tax"></span> <br />
+    Total: $<span id = "total"></span> <br />
+  </p>
+  <script>
+    document.getElementById("hotdogsNum").innerHTML = hotdogs;
+    document.getElementById("hotdogsCost").innerHTML = roundDec(hotdogs * 3.25);
+    document.getElementById("friesNum").innerHTML = fries;
+    document.getElementById("friesCost").innerHTML = roundDec(fries * 2.00);
+    document.getElementById("sodasNum").innerHTML = sodas;
+    document.getElementById("sodasCost").innerHTML = roundDec(sodas * 1.50);
+    var subtotal = hotdogs * 3.25 + fries * 2.00 + sodas * 1.50 ;
+    console.log(subtotal);
+    if (subtotal >= 20){
+        var discountLine = document.getElementById("discount");
+        discountLine.innerHTML = "You qualified for our 10% discount";
+        discountLine.insertAdjacentElement("afterend",
+                                               document.createElement("br"));
+        var discount = subtotal * 0.10;
+        subtotal = subtotal - discount;
+    }
+    document.getElementById("subtotal").innerHTML = roundDec(subtotal);
+    var tax = subtotal * 0.0625;
+    document.getElementById("tax").innerHTML = roundDec(tax);
+    document.getElementById("total").innerHTML = roundDec(subtotal + tax);
+
+  </script>
+
 </body>
 </html>
